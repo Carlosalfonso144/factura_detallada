@@ -81,7 +81,7 @@ class PDF_MC_Table extends FPDF
         } else if ($a == 'verde') {
             $this->SetFillColor(120, 253, 165);
         } else if ($a == 'azul') {
-            $this->SetFillColor(120, 158, 253);
+            $this->SetFillColor(189, 255, 255);
         } else if ($a == 'naranja') {
             $this->SetFillColor(255, 141, 0);
         } else if ($a == 'amarillo') {
@@ -161,25 +161,25 @@ class PDF_MC_Table extends FPDF
         if ($this->fdf_verlogotipo == '1') {
             if (file_exists(FS_MYDOCS . 'images/logo.png')) {
                 list($ancho, $alto) = getimagesize(FS_MYDOCS . 'images/logo.png');
-                $factor_tamano_ancho = 45 / $alto;
-                $factor_tamano_alto = 90 / $ancho;
+                $factor_tamano_ancho = 20 / $alto;
+                $factor_tamano_alto = 45 / $ancho;
                 $total_ancho = $factor_tamano_ancho * $ancho;
                 $total_alto = $factor_tamano_alto * $alto;
-                if ($total_alto > 45) {
-                    $this->Image(FS_MYDOCS . 'images/logo.png', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, $total_ancho, 45);
+                if ($total_alto > 20) {
+                    $this->Image(FS_MYDOCS . 'images/logo.png', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, $total_ancho, 20);
                 } else
-                    $this->Image(FS_MYDOCS . 'images/logo.png', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, 90, $total_alto);
+                    $this->Image(FS_MYDOCS . 'images/logo.png', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, 45, $total_alto);
             }
             else if (file_exists(FS_MYDOCS . 'images/logo.jpg')) {
                 list($ancho, $alto) = getimagesize(FS_MYDOCS . 'images/logo.jpg');
-                $factor_tamano_ancho = 45 / $alto;
-                $factor_tamano_alto = 90 / $ancho;
+                $factor_tamano_ancho = 20 / $alto;
+                $factor_tamano_alto = 45 / $ancho;
                 $total_ancho = $factor_tamano_ancho * $ancho;
                 $total_alto = $factor_tamano_alto * $alto;
-                if ($total_alto > 45) {
-                    $this->Image(FS_MYDOCS . 'images/logo.jpg', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, $total_ancho, 45);
+                if ($total_alto > 20) {
+                    $this->Image(FS_MYDOCS . 'images/logo.jpg', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, $total_ancho, 15);
                 } else
-                    $this->Image(FS_MYDOCS . 'images/logo.jpg', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, 90, $total_alto);
+                    $this->Image(FS_MYDOCS . 'images/logo.jpg', $this->fdf_Xlogotipo, $this->fdf_Ylogotipo, 45, $total_alto);
             }
 
             $this->Ln(0);
@@ -192,9 +192,9 @@ class PDF_MC_Table extends FPDF
 
             // draw png image
             if (file_exists(FS_MYDOCS . 'images/logo.png')) {
-                $this->Image(FS_MYDOCS . 'images/logo.png', $this->fdf_Xmarcaagua, $this->fdf_Ymarcaagua, 160);
+                $this->Image(FS_MYDOCS . 'images/logo.png', $this->fdf_Xmarcaagua, $this->fdf_Ymarcaagua, 80);
             } else if (file_exists(FS_MYDOCS . 'images/logo.jpg')) {
-                $this->Image(FS_MYDOCS . 'images/logo.jpg', $this->fdf_Xmarcaagua, $this->fdf_Ymarcaagua, 160);
+                $this->Image(FS_MYDOCS . 'images/logo.jpg', $this->fdf_Xmarcaagua, $this->fdf_Ymarcaagua, 80);
             }
 
             // restore full opacity
@@ -256,10 +256,10 @@ class PDF_MC_Table extends FPDF
         $this->addClientAdresse(utf8_decode($nombrecliente), utf8_decode($cliente));
 
         // Forma de Pago de la Factura
-        if ($this->es_factura) {
-            $this->addPago($this->fdf_epago);
-        } else
-            $this->addExtras($this->fdf_contacto);
+         //if ($this->es_factura) {
+         //   $this->addPago($this->fdf_epago);
+         //} else
+         //   $this->addExtras($this->fdf_contacto);
 
         // Divisa de la Factura
         //$this->addDivisa(utf8_decode($this->fdf_divisa));
@@ -268,16 +268,16 @@ class PDF_MC_Table extends FPDF
         // Pie de la Factura
         //$this->SetFont('Arial','',5);
         //$this->RotatedText(6, 210, utf8_decode($this->fde_piefactura), 90);
-        $this->SetFont('Arial', '', 7);
-        $this->SetY(-8);
-        $this->SetLineWidth(0.1);
-        $this->SetTextColor(0);
-        if ($this->es_factura) {
-            $this->MultiCell(0, 3, utf8_decode($this->fde_piefactura), 0, "J");
-        }
+  //      $this->SetFont('Arial', '', 5);
+    //    $this->SetY(-8);
+    //    $this->SetLineWidth(0.1);
+     //   $this->SetTextColor(0);
+     //   if ($this->es_factura) {
+     //       $this->MultiCell(0, 3, utf8_decode($this->fde_piefactura), 0, "J");
+     //   }
 
         // Cabecera Titulos Columnas
-        $this->SetXY(10, 95);
+        $this->SetXY(10, 60);
         $this->SetFont("Arial", "B", 9);
 
         $imprime_albaran = $this->impresion['f_detallada_imprime_albaran'] && !$this->impresion['f_detallada_agrupa_albaranes'];
@@ -342,7 +342,7 @@ class PDF_MC_Table extends FPDF
             // Neto por Pagina
             $imprime_albaran = $this->impresion['f_detallada_imprime_albaran'] && !$this->impresion['f_detallada_agrupa_albaranes'];
             $this->addNeto();
-            $this->DibujaCuadro(count($this->datoscab), 155, $imprime_albaran);
+            $this->DibujaCuadro(count($this->datoscab), 50, $imprime_albaran);
         }
     }
 
@@ -410,7 +410,7 @@ class PDF_MC_Table extends FPDF
         if ($agrupa_albaranes && ($this->albaran_anterior != $data[0]))
             $y -= 5;
 
-        // Por último scribimos La descripcion del articulo
+        // Por último Escribimos La descripcion del articulo
         $this->SetTextColor($this->colores[1][0], $this->colores[1][1], $this->colores[1][2]);
         $w = $this->widths[$ultimo];
         if (!$imprime_albaran) {
@@ -474,7 +474,7 @@ class PDF_MC_Table extends FPDF
 
         $h = 5 * $this->lineaactual;
         $this->Ln($h);
-        $this->SetY(100 + $h); // Y=100 en base a la altura de la cabecera
+        $this->SetY(65 + $h); // Y=100 en base a la altura de la cabecera
         // Dibujamos una Linea Gris para separar los Articulos
         $aquiX = $this->GetX() + 0.155;
         $aquiY = $this->GetY();
@@ -496,7 +496,7 @@ class PDF_MC_Table extends FPDF
     function DibujaCuadro($columnas, $total_largo, $imprime_albaran)
     {
         $this->SetDrawColor(210, 210, 210);
-        $aquiY = 100.6;
+        $aquiY = 65.6;
         $aquiX = 10.00125;
         for ($i = 0; $i < $columnas; $i++) {
             if (!$imprime_albaran && $i == 0) {
@@ -790,7 +790,7 @@ class PDF_MC_Table extends FPDF
         $this->MultiCell($length, 4, $adresse);
 
         if ($email != '') {
-            $this->SetXY($x1, $y1 + 73);
+            $this->SetXY($x1, $y1 + 48);
             $this->SetFont('Arial', '', 9);
             $this->Write(5, utf8_decode(ucfirst($this->idioma->fix_html($this->idioma->email))) . ': ');
             $this->SetTextColor(0, 0, 255);
@@ -800,7 +800,7 @@ class PDF_MC_Table extends FPDF
         }
 
         if ($web != '') {
-            $this->SetXY($x1, $y1 + 77);
+            $this->SetXY($x1, $y1 + 45);
             $this->SetFont('Arial', '', 9);
             $this->Write(5, utf8_decode(mb_strtoupper($this->idioma->web)) . ': ');
             $this->SetTextColor(0, 0, 255);
@@ -902,7 +902,7 @@ class PDF_MC_Table extends FPDF
      */
     function addClientAdresse($empresa, $adresse)
     {
-        $this->RoundedRect(110, 32, 90, 36, 3.5, 'D');
+        $this->RoundedRect(110, 32, 90, 20, 3.5, 'D');
         $this->Line(110, 38, 200, 38);
         $r1 = $this->w - 97;
         $this->SetFont("Arial", "B", 10);
@@ -924,7 +924,7 @@ class PDF_MC_Table extends FPDF
         // default
         $r1 = 110;
         $r2 = $r1 + 90;
-        $y1 = 70;
+        $y1 = 55;
         $y2 = $y1 + 23;
         $mid = $y1 + (($y2 - $y1) / 2);
         $this->RoundedRect($r1, $y1, ($r2 - $r1), ($y2 - $y1), 2.5, 'D');
@@ -1134,25 +1134,26 @@ class PDF_MC_Table extends FPDF
         if ($datos) {
             if (count($datos) > 4) {
                 // Comentar o eliminar las siguientes 5 lineas para NO mostrar el error.
-                $this->SetFont("Arial", "B", 10);
-                $this->SetXY($r1, $y1 + 8);
+               $this->SetFont("Arial", "B", 10);
+               $this->SetXY($r1, $y1 + 8);
                 $this->Cell(8, 4, "ERROR: Localizadas " . count($datos) . " lineas de " . FS_IVA . "... ", 0, '', "L");
-                $this->SetXY($r1, $y1 + 12);
-                $this->Cell(8, 4, chr(161) . chr(161) . chr(161) . " Esta plantilla SOLO puede detallar CUATRO lineas de " . FS_IVA . " !!!", 0, '', "L");
-            } else {
-                for ($i = 1; $i <= count($datos); $i++) {
-                    if ($i == 1) {
-                        $y2 = $y1 + 6;
-                    }
-                    if ($i == 2) {
-                        $y2 = $y1 + 9;
-                    }
-                    if ($i == 3) {
-                        $y2 = $y1 + 12;
-                    }
-                    if ($i == 4) {
-                        $y2 = $y1 + 15;
-                    }
+               $this->SetXY($r1, $y1 + 12);
+               $this->Cell(8, 4, chr(161) . chr(161) . chr(161) . " Esta plantilla SOLO puede detallar CUATRO lineas de " . FS_IVA . " !!!", 0, '', "L");
+
+           } else {
+               for ($i = 1; $i <= count($datos); $i++) {
+                   if ($i == 1) {
+                       $y2 = $y1 + 6;
+                   }
+                   if ($i == 2) {
+                       $y2 = $y1 + 9;
+                   }
+                   if ($i == 3) {
+                       $y2 = $y1 + 12;
+                   }
+                  if ($i == 4) {
+                       $y2 = $y1 + 15;
+                   }
                     $this->SetFont("Arial", "B", 6);
                     $this->SetXY($r1, $y2);
                     $this->Cell(8, 4, $datos[$i][0], 0, '', "L");
